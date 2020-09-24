@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Redirect } from 'react-router-dom';
 import './signin.scss';
+import { UserContext } from "../../providers/UserProvider";
+
+import { auth } from "../../lib/firebase";
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
@@ -8,7 +12,14 @@ const SignIn = () => {
 
     const signInHandler = async (event, email, password) => {
         event.preventDefault();
-        console.log(email, password);
+        auth.signInWithEmailAndPassword('test1@test.com', 'test123')
+            .then(function (firebaseUser) {
+                console.log(firebaseUser);
+            })
+            .catch(error => {
+                setError(error.toString())
+                console.error("Error signing in with password and email", error);
+            });
     }
 
     const onChangeHandler = (event) => {
@@ -20,44 +31,48 @@ const SignIn = () => {
             setPassword(value);
         }
     }
+    let user = useContext(UserContext);
     return (
-        <div className="auth-wrapper">
-            <div className="auth-inner">
-                <form>
-                    <h3>Sign In</h3>
+        user ?
+            <Redirect to="/account" />
+            :
+            <div className="auth-wrapper">
+                <div className="auth-inner">
+                    <form>
+                        <h3>Sign In</h3>
 
-                    <div className="form-group">
-                        <label>Email address</label>
-                        <input
-                            name="email"
-                            className="form-control"
-                            type="text"
-                            name="email"
-                            onChange={(event) => onChangeHandler(event)}
-                        />
-                    </div>
+                        <div className="form-group">
+                            <label>Email address</label>
+                            <input
+                                name="email"
+                                className="form-control"
+                                type="text"
+                                name="email"
+                                onChange={(event) => onChangeHandler(event)}
+                            />
+                        </div>
 
-                    <div className="form-group">
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            placeholder="Enter password"
-                            name="password"
-                            onChange={(event) => onChangeHandler(event)}
-                        />
-                    </div>
+                        <div className="form-group">
+                            <label>Password</label>
+                            <input
+                                type="password"
+                                className="form-control"
+                                placeholder="Enter password"
+                                name="password"
+                                onChange={(event) => onChangeHandler(event)}
+                            />
+                        </div>
 
-                    <button
-                        type="submit"
-                        className="btn btn-primary btn-block"
-                        onClick={(event) => { signInHandler(event, email, password) }}>
-                        Submit
+                        <button
+                            type="submit"
+                            className="btn btn-primary btn-block"
+                            onClick={(event) => { signInHandler(event, email, password) }}>
+                            Submit
             </button>
 
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
     );
 }
 export default SignIn;

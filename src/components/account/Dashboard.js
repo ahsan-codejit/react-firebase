@@ -6,7 +6,7 @@ import Profile from "./Profile";
 const Dashboard = () => {
     return (
         <div className="container">
-            <div class="row">
+            <div className="row">
                 <div className="col-3 left-box">
                     <Nav />
                 </div>

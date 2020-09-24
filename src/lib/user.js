@@ -1,5 +1,5 @@
 
-import { auth, firestore } from './firebase';
+import { firestore } from './firebase';
 
 export const generateUserDocument = async (user, additionalData) => {
     if (!user) return;

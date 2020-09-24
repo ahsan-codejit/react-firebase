@@ -5,7 +5,7 @@ import Nav from '../account/Nav';
 const Orders = () => {
     return (
         <div className="container">
-            <div class="row">
+            <div className="row">
                 <div className="col-3 left-box">
                     <Nav />
                 </div>
