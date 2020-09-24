@@ -17,8 +17,8 @@ function App() {
         <PrivateRoute path="/account" component={Dashboard} exact />
         <PrivateRoute path="/account/orders" component={Orders} exact />
         <PrivateRoute path="/account/order/:id" component={Order} exact />
-        <PrivateRoute exact path='/' component={SignIn} />
-        <PrivateRoute path="/sign-in" component={SignIn} />
+        <Route exact path='/' component={SignIn} />
+        <Route path="/sign-in" component={SignIn} />
       </Switch>
     </div>
   );

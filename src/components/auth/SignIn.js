@@ -12,7 +12,7 @@ const SignIn = () => {
 
     const signInHandler = async (event, email, password) => {
         event.preventDefault();
-        auth.signInWithEmailAndPassword('test1@test.com', 'test123')
+        auth.signInWithEmailAndPassword(email, password)
             .then(function (firebaseUser) {
                 console.log(firebaseUser);
             })

@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from '../account/Nav';
 
+import OrderList from './OrderList';
 
 const Orders = () => {
     return (
@@ -10,7 +11,8 @@ const Orders = () => {
                     <Nav />
                 </div>
                 <div className="col-9 content-box">
-                    <h3>Orders</h3>
+                    <h3>Order List</h3>
+                    <OrderList />
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { UserContext } from "../../providers/UserProvider";
 import { Link } from "react-router-dom";
+import { auth } from '../../lib/firebase';
 
 const Nav = () => {
     let user = useContext(UserContext);
@@ -12,6 +13,7 @@ const Nav = () => {
                 <h3>Profile</h3>
                 <p>{name}</p>
                 <p>{email}</p>
+                <button className="btn btn-warning mt-4" onClick={() => { auth.signOut() }}>Sign out</button>
             </div>
             <div className="menu">
                 <ul className="navbar-nav">
