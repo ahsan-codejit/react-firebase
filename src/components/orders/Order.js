@@ -3,9 +3,11 @@ import Nav from '../account/Nav';
 import { getOrder } from '../../lib/orders';
 import axios from 'axios';
 
+import './order.scss';
+
 const Order = (props) => {
     let id = props.match.params.id;
-    let [data, setData] = useState('');
+    let [message, setMessage] = useState('');
     let [title, setTitle] = useState('');
     let [address, setAddress] = useState('');
     let [customer, setCustomer] = useState('');
@@ -24,8 +26,12 @@ const Order = (props) => {
     const updateOrder = (event) => {
         event.preventDefault();
         async function update() {
-            const res = await axios.put('http://localhost:3001/orders/' + id, { title, customer, address });
-            console.log(res.data);
+            const res = await axios.put('http://localhost:3001/orders/' + id, { title, customer, address })
+                .then(result => {
+                    if (result.data) setMessage('Updated Successfully')
+                    console.log(result.data);
+                })
+
         }
         update();
     }
@@ -50,10 +56,13 @@ const Order = (props) => {
                     <Nav />
                 </div>
                 <div className="col-9 content-box">
-                    <h3>Order</h3>
+                    <h3>Order Details</h3>
+                    <div class="success-alert">
+                        {message}
+                    </div>
                     <form>
                         <div className="form-group">
-                            <label>Title</label>
+                            <h3>Title</h3>
                             <input
                                 name="title"
                                 className="form-control"
